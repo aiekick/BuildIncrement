@@ -37,6 +37,10 @@ static std::vector<std::string> splitString(const std::string& text, char delimi
 	return result;
 }
 
+#define BUILD_WORD "BuildNumber"
+#define MAJOR_WORD "MajorNumber"
+#define MINOR_WORD "MinorNumber"
+
 static bool ReplaceString(std::string& str, const std::string& oldStr, const std::string& newStr)
 {
 	bool Finded = false;
@@ -64,9 +68,9 @@ int main(int argc, char *argv[]) // Don't forget first integral argument 'argc'
 		{
 			map<string, int> dico;
 			
-			dico["Build"] = 0;
-			dico["Major"] = 0;
-			dico["Minor"] = 0;
+			dico[BUILD_WORD] = 0;
+			dico[MAJOR_WORD] = 0;
+			dico[MINOR_WORD] = 0;
 
 			string buffer;
 
@@ -85,7 +89,7 @@ int main(int argc, char *argv[]) // Don't forget first integral argument 'argc'
 						if (dico.find(typeStr) != dico.end())
 						{
 							int num = stoi(numStr);
-							if (typeStr == "Build")
+							if (typeStr == BUILD_WORD)
 								num++;
 
 							dico[typeStr] = num;
@@ -122,8 +126,8 @@ int main(int argc, char *argv[]) // Don't forget first integral argument 'argc'
 
 			if (argc > 2) // AndroidManifest.xml
 			{
-				string android_versionCode = toStr(dico["Build"]);
-				string android_versionName = toStr(dico["Major"]) + "." + toStr(dico["Minor"]) + "." + toStr(dico["Build"]);
+				string android_versionCode = toStr(dico[BUILD_WORD]);
+				string android_versionName = toStr(dico[MAJOR_WORD]) + "." + toStr(dico[MINOR_WORD]) + "." + toStr(dico[BUILD_WORD]);
 					
 				tinyxml2::XMLDocument doc;
 				tinyxml2::XMLError err = doc.LoadFile(argv[2]);

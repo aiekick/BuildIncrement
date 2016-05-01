@@ -1,3 +1,3 @@
-#define Build 0
-#define Major 1
-#define Minor 0
+#define BuildNumber 0
+#define MajorNumber 1
+#define MinorNumber 0
